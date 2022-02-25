@@ -2,30 +2,29 @@ import javax.swing.JFrame;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Color;
-import java.awt.Image;
-
-//CONTROLS THE GAME: THIS IS THE PROGRAM TO RUN
-
+import javax.swing.JPanel;
 
 public class setScreen extends JFrame
 {
-   public static int width = 1200;
-   public static int height = 800;
-   public setScreen()
-   {    
-      super("startGame");
-      setSize(width, height);
-      setBackground(Color.GREEN);
-      gameControl tb = new gameControl(this);
-		((Component)tb).setFocusable(true);
+	public static int WIDTH = 1200;
+	public static int HEIGHT = 800;
 
-      getContentPane().add(tb);
+	public setScreen() throws Exception
+	{
+      super( "setScreen" );
+      //JPanel window = new JPanel();
+      
+		setSize(WIDTH, HEIGHT);
+		//setBackground(Color.BLACK);
+		gameControl tb = new gameControl(this);
+		((Component)tb).setFocusable(true);
+      getContentPane().add( tb );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-   }
-   
-   public static void main(String[] args) throws Exception
-   {
-      setScreen run = new setScreen();
-   }
+	}
+
+	public static void main( String args[] ) throws Exception
+	{
+		setScreen run = new setScreen();
+	}
 }

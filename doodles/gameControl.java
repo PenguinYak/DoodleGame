@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import javax.imageio.ImageIO;
 import java.io.File;
+import javax.swing.JLabel;
+import java.util.Arrays;
 
 
 //EDITORS: SOME OF THESE FUNCTIONS PROBABLY AREN'T PERFECT, I WAS GOING FOR CONCEPTUALLY.
@@ -29,33 +31,34 @@ public class gameControl extends JPanel //implements actionListener
    private character user;
    private boolean[] keys;
    private Image world;
+   private Image jeff;
+   private int x;
+   private int y;
    //create list of enemies 
    public ArrayList<enemy> enemies;
    
    //MARK
-   public gameControl(JPanel par) throws Exception
+   public gameControl(JFrame par) throws Exception
    {
+      boolean[] keys = new boolean[4];
+      System.out.println(Arrays.toString(keys));
       character user = new character();
       //enemies = new ArrayList<enemy>(getEnemies());
       
-      boolean[] keys = new boolean[5];
+
 
 		setVisible(true);
-      setBackground(Color.GREEN);
+      //setBackground(Color.GREEN);
       world = ImageIO.read(new File("screen1.png"));
-      
+      jeff = ImageIO.read(new File("dude.jpg"));
+      x = 100;
+      y = 100;
    }
-    /*
-    public static JPanel drawGamePanel(){
-    //Create game panel and attributes
-    JPanel gamePanel = new JPanel();
-    Image background = ImageIO.read(new File("screen1.png"));//Toolkit.getDefaultToolkit().createImage("Background.png");
-    gamePanel.drawImage(background, 0, 0, null);
-    //Set Return
-    return gamePanel;
-    }
-    */
-   
+   public void keyTyped(KeyEvent e)
+	{
+
+	}
+
    //READS WHEN KEYS ARE PRESSED
    public void keyPressed(KeyEvent e)
 	{
@@ -75,10 +78,10 @@ public class gameControl extends JPanel //implements actionListener
 		{
 			keys[3] = true;
 		}
-      if (e.getKeyCode() == KeyEvent.VK_E)
-      {
-         keys[4] = true;
-      }
+      //if (e.getKeyCode() == KeyEvent.VK_E)
+      //{
+        // keys[4] = true;
+      //}
    } 
    //READS WHEN KEYS RELEASED
    public void keyReleased(KeyEvent e)
@@ -99,36 +102,55 @@ public class gameControl extends JPanel //implements actionListener
       {
          keys[3] = false;
       }
-      if(e.getKeyCode() == KeyEvent.VK_A)
+      //if(e.getKeyCode() == KeyEvent.VK_E)
+      //{
+        // keys[4] = false;
+      //}
+   }
+ 
+   
+      
+   //MARK
+   public void update(Graphics g)
+   {
+      paint(g);
+   }
+   
+   public void checkMovement()
+   {
+      System.out.println(keys);
+      if(keys[0] == true)
       {
-         keys[4] = false;
+         y = y+10;
+      }
+      if(keys[1] == true)
+      {
+         y = y-10;
+      }
+      if(keys[2] == true)
+      {
+         x = x+10;
+      }
+      if(keys[3] == true)
+      {
+         x= x-10;
       }
    }
    
-//    //Needs Work: Mouse Listener
-//    public void mouseClicked(MouseEvent e)
-//    {
-//       System.out.println("mouse");
-//    }
-   
-   
-   //MARK
-   public void update(Graphics window)
-   {
-      paint(window);
-   }
-   
-   public void paint(Graphics window, character user, Image worldView) throws Exception
-   {
-      Image world = ImageIO.read(new File("screen1.png"));
-      Image icon = ImageIO.read(new File("dude.png"));
-      window.drawImage(world, 0,0,null);
-      window.drawImage(icon, 128, 512, null);
-      //Graphics2D screen = worldView.createGraphics();
+    public void paint(Graphics g)
+    {
       
+      //x = user.getCentralX();
+      //y = user.getCentralY();
+      g.drawImage(world, 0, 0, 1200, 800, null);
+      g.drawImage(jeff, x , y, 64, 64, null);
+      System.out.println("inside paint" + Arrays.toString(keys));
+      checkMovement();
+      System.out.println("printed");
+      //checkMovement();
       /*for(int i = 0; i < enemies.size(); i++)
       {
-         window.drawImage(enemies.get(i).getIcon());
+         window.drawImage(enemies.get(i).getIcon(), enemies.get(i).getX(), enemies.get(i).getY(), this);
       }*/
    }
    
@@ -147,3 +169,24 @@ public class gameControl extends JPanel //implements actionListener
   	}
 
 }
+
+//RECYCLE CAN
+  
+//    //Needs Work: Mouse Listener
+//    public void mouseClicked(MouseEvent e)
+//    {
+//       System.out.println("mouse");
+//    }
+
+    // public void drawScreen(Graphics g, Image worldBackground) throws Exception
+//     {
+//       g.drawImage(ImageIO.read(new File("screen1.png")), 0, 0, this);
+//     }
+//    
+//    public void paintComponent(Graphics g)
+//    {
+//       g.drawImage(world, 0, 0, 1200, 800, this);
+//       g.drawImage(jeff, x , y, 64, 64, this);
+//       //g.setColor(Color.WHITE);
+//       //g.fillRect(200, 200, 200, 200);
+//    }  

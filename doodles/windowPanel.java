@@ -3,6 +3,9 @@ import java.io.File;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 //CREATES THE BACKGROUND AND TELLS WHICH ENEMIES TO CREATE AND WHERE
 public class windowPanel
@@ -31,6 +34,8 @@ public class windowPanel
     {
       return worldBackground;
     }
+    
+    
       
            
    

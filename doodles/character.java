@@ -36,14 +36,22 @@ public class character
       items = new ArrayList<String>();
       mouse = false;
    }
+   public void changeX(int change)
+   {
+      x += change;
+   }
+   public void changeY(int change)
+   {
+      y += change;
+   }
    
    public int getX()
    {
-      return x;
+      return 200;
    }
    public int getY()
    {
-      return y;
+      return 300;
    }
    
    public void updateHealth(int update)
